@@ -1,21 +1,28 @@
 import * as React from 'react';
 import { Searchbar } from 'react-native-paper';
+import SearchList from '../search-list';
 
-const Search = () => {
+type Props = {
+  fetchUrl: string;
+};
+const Search = ({ fetchUrl }: Props) => {
   const [searchQuery, setSearchQuery] = React.useState('');
 
-  const onChangeSearch = (query) => setSearchQuery(query);
+  const onChangeSearch = (query: string) => setSearchQuery(query);
 
   return (
-    <Searchbar
-      iconColor="#FF3D3C"
-      placeholder="キーワードで探す"
-      placeholderTextColor={'#C4C4C4'}
-      onChangeText={onChangeSearch}
-      value={searchQuery}
-      elevation={0}
-      style={{ backgroundColor: 'white' }}
-    />
+    <>
+      <Searchbar
+        iconColor="#FF3D3C"
+        placeholder="キーワードで探す"
+        placeholderTextColor={'#C4C4C4'}
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+        elevation={0}
+        maxLength={40}
+      />
+      <SearchList fetchUrl={fetchUrl} keyword={searchQuery} />
+    </>
   );
 };
 
